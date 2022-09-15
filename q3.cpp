@@ -1,67 +1,53 @@
-/*Create a class which stores name, roll number and total marks for a
-student. Input the data for a student and display it.
-Modify the program
-ii) to store marks in 5 subjects. Calculate the total marks and percentage
-of a student and display it.*/
-#include <iostream>
+//Modify the program to store marks in 5 subjects. Calculate the total marks and percentage of a student and display it.
+#include<iostream>
 using namespace std;
 
-class student {
-    private:
-     char name [30];
-     int rollNo;
-     int mark[5];
-     int maths, phy,chem,comp,phe;
-     int total;
-     float perc;
-    
+class Database
+{
+    string name;
+    int marks[5];
+    int roll;
     public:
-    void getDetails(void);
-    void putDetails(void);
+        void input();
+        void display();
+        void calculate();
 };
 
-void student::getDetails(void){
-    cout << "Enter name: " ;
-    cin >> name;
-    cout << "Enter roll number: ";
-    cin >> rollNo;
-    cout<<"Enter marks in maths \n";
-    cin>>maths;
-    cout<<"Enter marks physics \n";
-    cin>>phy;
-    cout<<"Enter marks in chem \n";
-    cin>>chem;
-    cout<<"Enter marks in comp \n";
-    cin>>comp;
-    cout<<"Enter marks in phe \n";
-    cin>>phe;
-    total=maths+phy+chem+comp+phe;
-    perc=(float)total/500*100;
+void Database::input()
+{
+    cout << "Enter name : ";
+    getline(cin, name);
+    cout <<  "Enter roll : ";
+    cin >> roll;
+    cout <<  "Enter marks : ";
+    for (int i=0; i<5; i++)
+        cin >> marks[i];
 }
 
-void student::putDetails(void){
-    cout << "Student details:\n";
-    cout << "Name:"<< name << ",Roll Number:" << rollNo << ",Total:" << total << ",Percentage:" << perc;
+void Database::display()
+{
+    cout << "Name : " << name <<endl;
+    cout << "Roll number : " << roll <<endl;
+    cout << "Marks : ";
+    for (int i=0; i<5; i++)
+        cout << marks[i] << " ";
+    cout << endl;
+}
+
+void Database::calculate()
+{
+    int sum=0, loop=5;
+    while (loop--) sum+= marks[loop];
+    cout << "Total marks : " << sum << endl;
+    cout << "Percentage : " << sum/5 << endl;
 }
 
 int main()
 {
-    student std[10];
-    int n ,loop;
+    Database db;
+    db.input();
+    db.display();
+    db.calculate();
 
-    cout << "Enter total number of students: ";
-    cin >> n;
-     
-    for(loop=0;loop< n; loop++){
-        cout << "Enter details of student " << loop+1 << ":\n";
-        std[loop].getDetails();
-}
-cout << endl;
-     
-    for(loop=0;loop< n; loop++){
-        cout << "Details of student " << (loop+1) << ":\n";
-        std[loop].putDetails();
-    }
-     
     return 0;
 }
